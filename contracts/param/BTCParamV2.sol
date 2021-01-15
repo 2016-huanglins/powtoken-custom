@@ -149,7 +149,7 @@ contract BTCParamV2 {
         R: 区块奖励
         H：算力
         P: 奖励(单位秒)
-        P = H * R * (D * 2  ** 32)
+        P = H * R / (D * 2  ** 32)
         */
         uint256 oneTHash = 10 ** 12;
         uint256 baseDiff = 2 ** 32;

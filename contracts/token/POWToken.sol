@@ -344,7 +344,7 @@ contract POWToken is POWERC20 {
             uint256 remaining = rewardPeriodFinish.sub(block.timestamp);
             // 剩余token数量
             uint256 leftover = remaining.mul(rewardRate);
-            // 计算新的mars方法速率
+            // 计算新的mars释放速率
             rewardRate = reward.add(leftover).div(rewardsDuration);
         }
 

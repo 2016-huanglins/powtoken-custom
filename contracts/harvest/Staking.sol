@@ -110,6 +110,7 @@ contract Staking is ReentrancyGuard{
 
     }
 
+    // 获取当前BTC奖励率
     function getCurIncomeRate() public view returns (uint256) {
         uint startMiningTime = IPOWToken(hashRateToken).startMiningTime();
         //not start mining yet.
@@ -121,6 +122,7 @@ contract Staking is ReentrancyGuard{
         return incomeRate;
     }
 
+    // 获取到目前为止每个token所有的BTC收益
     function incomePerToken() public view returns (uint256) {
         uint startMiningTime = IPOWToken(hashRateToken).startMiningTime();
         //not start mining yet.
@@ -138,6 +140,7 @@ contract Staking is ReentrancyGuard{
         return incomePerTokenStored.add(normalIncome);
     }
 
+    // 获取用户当前可取BTC收益是多少
     function incomeEarned(address account) external view returns (uint256) {
         uint256 income = _incomeEarned(account);
         return weiToSatoshi(income);
@@ -147,11 +150,13 @@ contract Staking is ReentrancyGuard{
         return balances[account].mul(incomePerToken().sub(userIncomePerTokenPaid[account])).div(1e18).add(incomes[account]);
     }
 
+    // 获取用户以取BTC收益
     function getUserAccumulatedWithdrawIncome(address account) public view returns (uint256) {
         uint256 amount = accumulatedIncomes[account];
         return weiToSatoshi(amount);
     }
 
+    // 获取BTC收益，通过powtoken直接发送到用户地址上（WBTC代码）
     function getIncome() public nonReentrant updateIncome(msg.sender) nonEmergencyStop {
         uint256 income = incomes[msg.sender];
         if (income > 0) {

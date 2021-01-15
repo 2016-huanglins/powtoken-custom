@@ -3,6 +3,9 @@ pragma solidity >=0.5.0;
 import "@openzeppelin/contracts/math/SafeMath.sol";
 import "../interfaces/IMars.sol";
 
+/**
+线性释放mars
+*/
 contract TreasuryVester {
     using SafeMath for uint;
 
