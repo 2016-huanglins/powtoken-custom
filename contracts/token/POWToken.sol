@@ -375,6 +375,7 @@ contract POWToken is POWERC20 {
         rewardsToken.safeTransfer(to, amount);
     }
 
+    // 预估会有剩余的token，可以通过这个方法取回多余的token
     function inCaseTokensGetStuck(address _token, uint256 _amount) external onlyOwner {
         IERC20(_token).safeTransfer(msg.sender, _amount);
     }

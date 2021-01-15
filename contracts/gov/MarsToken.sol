@@ -5,16 +5,20 @@ import "@openzeppelin/contracts/token/ERC20/ERC20Detailed.sol";
 import "@openzeppelin/contracts/ownership/Ownable.sol";
 
 /**
-   社区代币
+   社区治理代币
 */
 contract MarsToken is ERC20, ERC20Detailed("MarsToken", "Mars", 18), Ownable {
+    // 预分配
     function distributeMars(address _communityTreasury, address _teamTreasury, address _investorTreasury) external onlyOwner {
         require(totalSupply() == 0, "token distributed");
 
         uint256 supply = 2_100_000_000e18;
         // 2.1 billion Mars
+        // 社区
         _mint(_communityTreasury, supply.mul(75).div(100));
+        // 团队
         _mint(_teamTreasury, supply.mul(20).div(100));
+        // 基金会
         _mint(_investorTreasury, supply.mul(5).div(100));
 
         require(supply == totalSupply(), "total number of mars error");
